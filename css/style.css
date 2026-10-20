@@ -69,3 +69,8 @@ footer .credit { font-size: 0.85rem; opacity: 0.8; margin-top: 8px; }
 
 /* v2 accessibility and interactive study tools */
 a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid #fff;outline-offset:3px}button{cursor:pointer;border:0;font:inherit}nav{display:flex;flex-wrap:wrap;gap:.6rem}nav a{margin:0}.btn{text-decoration:none;cursor:pointer}.answer-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1rem;margin:1rem 0}.answer-label{display:flex;flex-direction:column;gap:.4rem;font-weight:600}.answer-label textarea{width:100%;padding:.75rem;border-radius:.6rem;border:1px solid #7891b7;background:#fff;color:#172033;font:inherit}.answer-work{border:1px solid #415677;border-radius:12px;padding:1rem;margin:1rem 0}.timer-display{font-size:clamp(3rem,12vw,5rem);font-weight:750;letter-spacing:.06em;font-variant-numeric:tabular-nums;margin:.5rem 0}.timer-actions{display:flex;gap:.7rem;flex-wrap:wrap}.timer-actions .btn{min-width:8rem}@media(max-width:600px){header{padding:8px}.container{padding:14px}.card{padding:14px}.table{display:block;overflow-x:auto}h1{font-size:1.6rem}}
+
+/* Clear, accessible navigation for OL learners */
+.page-navigation{display:flex;flex-wrap:wrap;gap:.65rem;margin:0 0 1.2rem;align-items:center}
+.page-navigation .page-nav-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.55rem .9rem;border:1px solid #ffd54d;border-radius:9px;background:#192841;color:#ffe083;font-weight:700;text-decoration:none;line-height:1.35}
+.page-navigation .page-nav-link:hover,.page-navigation .page-nav-link:focus-visible{background:#ffd54d;color:#101827}
