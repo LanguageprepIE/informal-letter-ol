@@ -74,3 +74,27 @@ a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid #f
 .page-navigation{display:flex;flex-wrap:wrap;gap:.65rem;margin:0 0 1.2rem;align-items:center}
 .page-navigation .page-nav-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.55rem .9rem;border:1px solid #ffd54d;border-radius:9px;background:#192841;color:#ffe083;font-weight:700;text-decoration:none;line-height:1.35}
 .page-navigation .page-nav-link:hover,.page-navigation .page-nav-link:focus-visible{background:#ffd54d;color:#101827}
+
+/* Homepage visual refresh — scoped to the hub, leaving learning pages unchanged */
+.hub-home{background:radial-gradient(ellipse 70% 38% at 88% 4%,rgba(38,82,145,.26),transparent 75%),radial-gradient(ellipse 65% 45% at 7% 42%,rgba(28,64,112,.14),transparent 75%),#0b1220;background-attachment:fixed}
+.hub-home .hub-hero{padding:clamp(1.3rem,3vw,2.8rem) 0 1.3rem;background:linear-gradient(145deg,rgba(21,42,78,.8),rgba(11,18,32,.2));border-bottom:1px solid #2a3b58}
+.hub-hero .container{padding-top:1rem;padding-bottom:1rem}
+.hub-eyebrow{color:#ffe083;font-size:.79rem;font-weight:750;letter-spacing:.14em;margin:0 0 .85rem}
+.hub-hero h1{font-size:clamp(1.7rem,3.2vw,2.65rem);max-width:850px;margin:.25rem 0 1rem}
+.hub-lead{font-size:clamp(1.2rem,2vw,1.55rem);font-weight:700;margin:.4rem 0}
+.hub-sublead{color:#c1cce0;max-width:760px;margin:.35rem 0 0}
+.hub-main{padding-top:1.5rem}
+.hub-section-title{font-size:1.25rem;margin:0 0 1rem}
+.hub-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:1rem}
+.hub-card{display:flex;flex-direction:column;align-items:flex-start;min-height:235px;border-color:#2c4060;background:linear-gradient(160deg,rgba(28,45,72,.98),rgba(17,26,43,.98));box-shadow:0 10px 26px rgba(0,0,0,.16);transition:border-color .15s,transform .15s}
+.hub-card:hover{border-color:#d2ae46;transform:translateY(-2px)}
+.hub-card-icon{color:#ffda70;background:#243651;border:1px solid #3a506e;box-sizing:content-box;padding:.65rem;border-radius:12px;margin-bottom:.9rem}
+.hub-card h2{font-size:1.25rem;margin:.1rem 0 .35rem}
+.hub-card p{font-size:.95rem;margin:.55rem 0 1rem;flex:1;color:#c2ccda}
+.hub-card .btn{margin-top:auto;min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:.55rem 1rem;background:#ffd54d;color:#18202e}
+.hub-card .btn:hover,.hub-card .btn:focus-visible{background:#ffe58b;color:#101827}
+.hub-about{max-width:900px;margin:2.4rem 0 .5rem;padding:1.2rem 1.35rem;border:1px solid #2b3f5b;border-radius:14px;background:rgba(17,26,43,.75)}
+.hub-about h2{font-size:1.15rem;margin:.1rem 0 .75rem}
+.hub-about p{color:#c2ccda;margin:.5rem 0}
+@media(prefers-reduced-motion:reduce){.hub-card{transition:none}.hub-card:hover{transform:none}}
+@media(max-width:600px){.hub-card{min-height:0}.hub-home .hub-hero{padding:.9rem 0}.hub-main{padding-top:1rem}}
