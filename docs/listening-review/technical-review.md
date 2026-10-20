@@ -30,3 +30,7 @@ La URL publicada de Listening 01 sirve HTTP 200 y contenido audio/mp3. La págin
 ## Revisión pendiente del profesor
 
 Escuchar los tres audios y valorar ritmo, naturalidad y pronunciación; aprobar contenido y dificultad; probar las páginas en Safari de iPad y ordenador; autorizar expresamente cualquier incorporación a main. No se inicia la siguiente tanda.
+
+## Verificación remota completada
+
+La rama se ha vuelto a descargar con git fetch. Los once archivos añadidos coinciden byte por byte con los locales. Los tres MP3 de la rama también se han descargado desde raw.githubusercontent.com: HTTP 200, Content-Type audio/mpeg y SHA-256 idéntico en los tres casos. Es una prueba de los binarios de la rama; no es una prueba del reproductor en GitHub Pages.
