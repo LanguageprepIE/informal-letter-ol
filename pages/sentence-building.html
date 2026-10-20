@@ -43,16 +43,16 @@ const routines=[
 function sentencePair(u){
 if(u.id==="regulares"){
 const v=u.verbs[verbIndex],complement=v[6][ending],verb=tense===0?v[subject+1]:tense===1?v[subject+3]:(subject===0?"voy":"va")+" a "+v[0];
-return [u.subjects[subject][0]+" "+verb+" "+complement[0]+".",u.subjects[subject][1]+" "+(tense===0?(subject===0?"":""):"")+" "+v[5]+" "+complement[1]+" (model meaning)."];
+const englishVerb=tense===0?(subject===0?v[5]:(v[5]==="study"?"studies":v[5]==="work"?"works":v[5]==="visit"?"visits":v[5]==="listen to"?"listens to":v[5]==="eat"?"eats":"lives")):tense===1?({study:"studied",work:"worked",visit:"visited","listen to":"listened to",eat:"ate",live:"lived"}[v[5]]):(subject===0?"am":"is")+" going to "+v[5];return [u.subjects[subject][0]+" "+verb+" "+complement[0]+".",u.subjects[subject][1]+" "+englishVerb+" "+complement[1]+"."];
 }
 if(u.id==="gustar"){
 const plural=ending===2||ending===3,base=tense===0?(plural?"gustan":"gusta"):tense===1?(plural?"gustaron":"gustó"):(plural?"van a gustar":"va a gustar");
 const prefix=subject===0?"Me":"A mi hermana le";
-return [prefix+" "+(negative?"no ":"")+base+" "+u.ends[ending][0]+".",(subject===0?"I":"My sister")+" "+(negative?"do not ":"")+"like "+u.ends[ending][1]+" (meaning; time varies)."];
+const en=tense===0?(negative?(subject===0?"do not like":"does not like"):(subject===0?"like":"likes")):tense===1?(negative?"did not like":"liked"):(negative?(subject===0?"am not going to like":"is not going to like"):(subject===0?"am going to like":"is going to like"));return [prefix+" "+(negative?"no ":"")+base+" "+u.ends[ending][0]+".",(subject===0?"I":"My sister")+" "+en+" "+u.ends[ending][1]+"."];
 }
 if(u.id==="reflexivos"){
 const v=routines[verbIndex],verb=tense===0?v[1][subject]:tense===1?v[2][subject]:(subject===0?"voy":"va")+" a "+v[0];
-return [u.subjects[subject][0]+" "+verb+" "+u.ends[ending][0]+".",(subject===0?"I":"My sister")+" "+v[3]+" "+u.ends[ending][1]+" (meaning; time varies)."];
+const past={ "get up":"got up","shower":"showered","get dressed":"got dressed","go to bed":"went to bed"};const present={ "get up":"gets up","shower":"showers","get dressed":"gets dressed","go to bed":"goes to bed"};const en=tense===0?(subject===0?v[3]:present[v[3]]):tense===1?past[v[3]]:(subject===0?"am":"is")+" going to "+v[3];return [u.subjects[subject][0]+" "+verb+" "+u.ends[ending][0]+".",(subject===0?"I":"My sister")+" "+en+" "+u.ends[ending][1]+"."];
 }
 return [sentence(u),english(u)];
 }
