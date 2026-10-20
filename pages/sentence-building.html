@@ -29,8 +29,8 @@ return start+" "+verb+" "+end+place+" "+u.times[tense][0]+".";
 }
 function english(u){
 const who=u.subjects[subject][1],end=u.ends[ending][1];
-const verb=u.id==="ir"?["goes to","went to","is going to go to"]:u.id==="ser"?["is","was","is going to be"]:u.id.startsWith("estar")?["is","was","is going to be"]:u.id==="tener"?["has","had","is going to have"]:["studies","studied","is going to study"];
-const v=subject===0?(u.id==="ir"?["go to","went to","am going to go to"][tense]:u.id==="ser"||u.id.startsWith("estar")?["am","was","am going to be"][tense]:u.id==="tener"?["have","had","am going to have"][tense]:["study","studied","am going to study"][tense]):verb[tense];
+const verb=u.id==="ir"?["goes","went","is going to go"]:u.id==="ser"?["is","was","is going to be"]:u.id.startsWith("estar")?["is","was","is going to be"]:u.id==="tener"?["has","had","is going to have"]:["studies","studied","is going to study"];
+const v=subject===0?(u.id==="ir"?["go","went","am going to go"][tense]:u.id==="ser"||u.id.startsWith("estar")?["am","was","am going to be"][tense]:u.id==="tener"?["have","had","am going to have"][tense]:["study","studied","am going to study"][tense]):verb[tense];
 return who+" "+v+" "+end+(u.withPeople&&withPerson?" "+people[withPerson][1]:"")+" "+u.times[tense][1]+".";
 }
 function renderWorkshop(){
