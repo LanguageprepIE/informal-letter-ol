@@ -1,0 +1,23 @@
+[
+  {
+    "path": "assets/audio/LCOL_LISTENING_03_PEOPLE.mp3",
+    "size": 1054970,
+    "duration_seconds": 65.906939,
+    "sha256": "c8309076a457459e947dea182cb47d842cf1485f5b82b3e2ab4dd1078034e05a",
+    "git_blob_sha": "c4b06163a501cde0ebabc77a3de7df26fe48bffc"
+  },
+  {
+    "path": "assets/audio/LCOL_LISTENING_04_CULTURE.mp3",
+    "size": 857684,
+    "duration_seconds": 52.506122,
+    "sha256": "ebad65a1ecd3b7d3b3d34a5cd0b1900acff919fc620760dc884a40bf85ef3323",
+    "git_blob_sha": "b8f6b8a85e86a7cc5de74024006bd5cc917abade"
+  },
+  {
+    "path": "assets/audio/LCOL_LISTENING_05_NEWS.mp3",
+    "size": 1075441,
+    "duration_seconds": 66.115918,
+    "sha256": "70bd6ea1956bd953d39b9ecd514d45d121eee990475c07055b19f8f5f5d5f206",
+    "git_blob_sha": "5b8f40ca58097764061d9ba882289a8aa070eac0"
+  }
+]
