@@ -1,0 +1,258 @@
+[
+  {
+    "id": "03",
+    "title": "Clara, fotos con futuro",
+    "category": "People & Biographies / Personas y biografías",
+    "slug": "people-01",
+    "audio": "LCOL_LISTENING_03_PEOPLE.mp3",
+    "voices": "Alberto (entrevistador) y Matilda Paz (Clara)",
+    "note": "Fictional interview / Entrevista ficticia.",
+    "objectives": "OL inicial con un pequeño avance: entrevista de dos voces; presente, indefinido, imperfecto, me gustaría e ir a + infinitivo. Comprender una edad de inicio, una finalidad y distinguir dos destinos del dinero. Cinco datos inequívocos, en orden de escucha.",
+    "items": [
+      {
+        "q": "How old was Clara when she started taking photos? / ¿Cuántos años tenía Clara cuando empezó a hacer fotos?",
+        "opts": [
+          "Eighteen / Dieciocho",
+          "Twelve / Doce",
+          "Fourteen / Catorce"
+        ],
+        "a": 2,
+        "h": "Separate her age now from her age when she began. / Distingue su edad actual de la edad a la que empezó.",
+        "e": "«Empecé a los catorce». Dieciocho es su edad actual."
+      },
+      {
+        "q": "What does Clara prefer to photograph now? / ¿Qué prefiere fotografiar Clara ahora?",
+        "opts": [
+          "Animals / Animales",
+          "Buildings / Edificios",
+          "Her family / Su familia"
+        ],
+        "a": 0,
+        "h": "Listen for the change between «al principio» and «ahora». / Escucha el cambio entre «al principio» y «ahora».",
+        "e": "«Ahora prefiero fotografiar animales». Antes fotografiaba a su familia."
+      },
+      {
+        "q": "Why does the association publish the photos online? / ¿Por qué publica la asociación las fotos en internet?",
+        "opts": [
+          "To sell cameras / Para vender cámaras",
+          "To find homes for dogs / Para encontrar un hogar a los perros",
+          "To advertise a photography course / Para anunciar un curso de fotografía"
+        ],
+        "a": 1,
+        "h": "Listen for the purpose after «para». / Escucha la finalidad después de «para».",
+        "e": "«Para ayudarles a encontrar un hogar»."
+      },
+      {
+        "q": "What did they buy with the exhibition money? / ¿Qué compraron con el dinero de la exposición?",
+        "opts": [
+          "A new camera / Una cámara nueva",
+          "A train ticket / Un billete de tren",
+          "Food for the dogs / Comida para los perros"
+        ],
+        "a": 2,
+        "h": "Focus on the completed event, not her summer plans. / Céntrate en el hecho pasado, no en sus planes de verano.",
+        "e": "«Con el dinero compramos comida para los perros»."
+      },
+      {
+        "q": "What will Clara save her summer earnings for? / ¿Para qué ahorrará Clara el dinero de su trabajo de verano?",
+        "opts": [
+          "To rent a room / Para pagar una habitación",
+          "To buy another camera / Para comprar otra cámara",
+          "To buy dog food / Para comprar comida para perros"
+        ],
+        "a": 0,
+        "h": "Listen to the final contrast: «no quiero…; necesito…». / Escucha el contraste final: «no quiero…; necesito…».",
+        "e": "«Necesito dinero para pagar una habitación». La comida corresponde a la exposición pasada."
+      }
+    ],
+    "segments": [
+      {
+        "key": "03-1",
+        "voice": "PFT8NrCPtO9yltPvubes",
+        "speaker": "Entrevistador",
+        "text": "Hoy, en nuestra radio juvenil, hablamos con Clara, una joven aficionada a la fotografía. Clara, ¿dónde vives y cuándo empezaste a hacer fotos?"
+      },
+      {
+        "key": "03-2",
+        "voice": "dX2UjlDzOz7RY8kmMXZo",
+        "speaker": "Clara",
+        "text": "Tengo dieciocho años y vivo en Zaragoza. Empecé a los catorce, cuando mi abuelo me regaló su cámara. Al principio hacía fotos de mi familia. Ahora prefiero fotografiar animales."
+      },
+      {
+        "key": "03-3",
+        "voice": "PFT8NrCPtO9yltPvubes",
+        "speaker": "Entrevistador",
+        "text": "También colaboras con una asociación. ¿Qué haces allí?"
+      },
+      {
+        "key": "03-4",
+        "voice": "dX2UjlDzOz7RY8kmMXZo",
+        "speaker": "Clara",
+        "text": "Los sábados hago fotos de perros que necesitan una familia. La asociación publica las fotos en internet para ayudarles a encontrar un hogar. El mes pasado organicé una exposición en mi instituto. Con el dinero compramos comida para los perros."
+      },
+      {
+        "key": "03-5",
+        "voice": "PFT8NrCPtO9yltPvubes",
+        "speaker": "Entrevistador",
+        "text": "¿Y qué te gustaría hacer el año que viene?"
+      },
+      {
+        "key": "03-6",
+        "voice": "dX2UjlDzOz7RY8kmMXZo",
+        "speaker": "Clara",
+        "text": "Me gustaría estudiar fotografía en Valencia. Este verano voy a trabajar en una tienda para ahorrar. No quiero comprar otra cámara; necesito dinero para pagar una habitación."
+      }
+    ]
+  },
+  {
+    "id": "04",
+    "title": "Las Fallas, del arte al fuego",
+    "category": "Events & Culture / Eventos y cultura",
+    "slug": "culture-01",
+    "audio": "LCOL_LISTENING_04_CULTURE.mp3",
+    "voices": "Mario (reportero)",
+    "note": "Real cultural traditions; the school exhibition is fictional. / Tradiciones reales; la exposición del instituto es ficticia.",
+    "objectives": "OL inicial-intermedio: reportaje cultural y anuncio escolar. Presente cultural, pasiva refleja receptiva, pasado y futuro. Comprender explicación, excepción y contraste entre el año pasado y este año. El vocabulario cultural nuevo se explica en el propio audio.",
+    "source": "https://www.visitvalencia.com/agenda-valencia/fiestas/las-fallas-de-valencia/preguntas",
+    "items": [
+      {
+        "q": "What do many of the figures represent? / ¿Qué representan muchas de las figuras?",
+        "opts": [
+          "Animals from local farms / Animales de granjas locales",
+          "Well-known people, shown humorously / Personas conocidas, con humor",
+          "Buildings from other countries / Edificios de otros países"
+        ],
+        "a": 1,
+        "h": "Listen to the sentence after the word «ninots». / Escucha la frase después de la palabra «ninots».",
+        "e": "«Muchas representan, con humor, a personas conocidas»."
+      },
+      {
+        "q": "What happens to the two figures chosen by the public? / ¿Qué ocurre con las dos figuras elegidas por el público?",
+        "opts": [
+          "They are taken to the Museo Fallero / Se llevan al Museo Fallero",
+          "They are sold to visitors / Se venden a los visitantes",
+          "They are burned the next morning / Se queman a la mañana siguiente"
+        ],
+        "a": 0,
+        "h": "«Sin embargo» introduces an exception; follow it to the next sentence. / «Sin embargo» introduce una excepción; sigue hasta la frase siguiente.",
+        "e": "Se eligen para salvarlos y «después se llevan al Museo Fallero»."
+      },
+      {
+        "q": "What is the school organising this year? / ¿Qué organiza el instituto este año?",
+        "opts": [
+          "A drawing competition / Un concurso de dibujo",
+          "A music concert / Un concierto",
+          "A photo exhibition / Una exposición de fotos"
+        ],
+        "a": 2,
+        "h": "Distinguish «el año pasado» from «este año». / Distingue «el año pasado» de «este año».",
+        "e": "«Este año hemos elegido fotografías». El concurso de dibujo fue el año pasado."
+      },
+      {
+        "q": "Where will the school event take place? / ¿Dónde se celebrará la actividad del instituto?",
+        "opts": [
+          "In the dining hall / En el comedor",
+          "In the library / En la biblioteca",
+          "In the playground / En el patio"
+        ],
+        "a": 1,
+        "h": "Listen for a place and the correction that follows it. / Escucha un lugar y la aclaración que viene después.",
+        "e": "«La exposición estará en la biblioteca, no en el comedor»."
+      },
+      {
+        "q": "When can students visit the exhibition? / ¿Cuándo pueden visitar los alumnos la exposición?",
+        "opts": [
+          "During break next Thursday / Durante el recreo del próximo jueves",
+          "After school next Thursday / Después de clase el próximo jueves",
+          "During break next Friday / Durante el recreo del próximo viernes"
+        ],
+        "a": 0,
+        "h": "Combine the day announced earlier with the visiting time at the end. / Combina el día anunciado antes con el momento de visita al final.",
+        "e": "«El próximo jueves» y «puedes visitarla durante el recreo»."
+      }
+    ],
+    "segments": [
+      {
+        "key": "04",
+        "voice": "uJOittXFsgvpY3q1g8vB",
+        "speaker": "Reportero",
+        "text": "Bienvenidos a nuestra sección de cultura. Hoy descubrimos las Fallas de Valencia, una fiesta que se celebra en marzo. En las calles se colocan enormes monumentos con figuras llamadas ninots. Muchas representan, con humor, a personas conocidas. Los artistas trabajan durante meses para prepararlas.\n\nLa noche del diecinueve de marzo se celebra la cremà: se queman los monumentos. Sin embargo, no se quema todo. Cada año, el público elige un ninot de una falla grande y otro de una falla infantil para salvarlos. Después se llevan al Museo Fallero.\n\n¿Quieres conocer esta tradición? En nuestro instituto vamos a preparar una pequeña exposición de fotos el próximo jueves. El año pasado hicimos un concurso de dibujo, pero este año hemos elegido fotografías. La exposición estará en la biblioteca, no en el comedor. Puedes visitarla durante el recreo. La entrada será gratuita."
+      }
+    ]
+  },
+  {
+    "id": "05",
+    "title": "Noticias del Instituto del Mar",
+    "category": "News & Current Affairs / Noticias y actualidad",
+    "slug": "news-01",
+    "audio": "LCOL_LISTENING_05_NEWS.mp3",
+    "voices": "María Díaz (presentadora)",
+    "note": "SIMULATED NEWS: the school and all events are fictional. / NOTICIAS SIMULADAS: el instituto y todos los acontecimientos son ficticios.",
+    "objectives": "OL intermedio dentro de esta primera tanda: tres noticias breves con señalización explícita. Indefinido, futuro, ir a, deber y poder; medio ambiente, transporte y estudio. Asociar cada dato a su noticia, entender causa y finalidad y distinguir horarios actuales y nuevos.",
+    "items": [
+      {
+        "q": "How many students took part in the beach clean-up? / ¿Cuántos alumnos participaron en la limpieza de la playa?",
+        "opts": [
+          "Fourteen / Catorce",
+          "Thirty / Treinta",
+          "Forty / Cuarenta"
+        ],
+        "a": 2,
+        "h": "The number belongs to yesterday's completed activity. / El número corresponde a la actividad terminada de ayer.",
+        "e": "«Ayer, cuarenta estudiantes limpiaron la playa»."
+      },
+      {
+        "q": "Why will the north-route bus stop somewhere different? / ¿Por qué parará en otro lugar el autobús de la ruta norte?",
+        "opts": [
+          "There will be roadworks / Habrá obras",
+          "The timetable will change / Cambiará el horario",
+          "The school will be closed / El instituto estará cerrado"
+        ],
+        "a": 0,
+        "h": "In the transport item, listen to the reason after «porque». / En la noticia de transporte, escucha el motivo después de «porque».",
+        "e": "«Porque habrá obras en esa calle». El horario no cambiará."
+      },
+      {
+        "q": "Where should students wait for that bus tomorrow? / ¿Dónde deben esperar mañana los alumnos ese autobús?",
+        "opts": [
+          "In front of the school / Delante del instituto",
+          "In the square beside the pharmacy / En la plaza junto a la farmacia",
+          "At the entrance to the park / En la entrada del parque"
+        ],
+        "a": 1,
+        "h": "Listen for the instruction after the explanation of the problem. / Escucha la instrucción después de la explicación del problema.",
+        "e": "«Deberán esperar en la plaza, junto a la farmacia»."
+      },
+      {
+        "q": "What additional opening hours will the library offer? / ¿Qué horario adicional tendrá la biblioteca?",
+        "opts": [
+          "Mondays, four to six / Los lunes, de cuatro a seis",
+          "Wednesdays, six to eight / Los miércoles, de seis a ocho",
+          "Wednesdays, four to six / Los miércoles, de cuatro a seis"
+        ],
+        "a": 2,
+        "h": "Separate the day the change starts from the weekly opening day and hours. / Distingue el día de inicio del cambio del día semanal y las horas de apertura.",
+        "e": "El cambio empieza el lunes, pero abrirá «los miércoles por la tarde, de cuatro a seis»."
+      },
+      {
+        "q": "Who is the new library timetable intended to help? / ¿A quién quiere ayudar el nuevo horario de la biblioteca?",
+        "opts": [
+          "Students without a quiet place to study at home / A alumnos sin un lugar tranquilo para estudiar en casa",
+          "Students waiting for a morning bus / A alumnos que esperan un autobús por la mañana",
+          "Students who want to buy books / A alumnos que quieren comprar libros"
+        ],
+        "a": 0,
+        "h": "Listen to the reason for the change at the end of the last news item. / Escucha la finalidad del cambio al final de la última noticia.",
+        "e": "Permitirá estudiar allí «a los alumnos que no tienen un lugar tranquilo en casa»."
+      }
+    ],
+    "segments": [
+      {
+        "key": "05",
+        "voice": "TVZcExm6tc18D9qo57y7",
+        "speaker": "Presentadora",
+        "text": "Este boletín es una simulación para practicar español. Las noticias y el instituto son inventados.\n\nBuenas tardes. Estas son las noticias del Instituto del Mar.\n\nPrimero, medio ambiente. Ayer, cuarenta estudiantes limpiaron la playa. Encontraron muchas botellas de plástico. El próximo mes volverán, pero esta vez también van a recoger basura en el parque cercano.\n\nAhora, transporte. El autobús escolar de la ruta norte no podrá parar delante del instituto mañana, porque habrá obras en esa calle. Los alumnos deberán esperar en la plaza, junto a la farmacia. El horario no cambiará.\n\nTerminamos con una noticia sobre la biblioteca. Desde el lunes, abrirá también los miércoles por la tarde, de cuatro a seis. Antes solo abría por las mañanas. El nuevo horario permitirá estudiar allí a los alumnos que no tienen un lugar tranquilo en casa.\n\nHasta aquí nuestro boletín simulado. Gracias por escucharnos."
+      }
+    ]
+  }
+]

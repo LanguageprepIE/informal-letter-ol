@@ -1,0 +1,23 @@
+[
+  {
+    "path": "assets/audio/LCOL_LISTENING_03_PEOPLE.mp3",
+    "http_status": 200,
+    "content_type": "audio/mpeg",
+    "bytes": 1054970,
+    "sha256_matches": true
+  },
+  {
+    "path": "assets/audio/LCOL_LISTENING_04_CULTURE.mp3",
+    "http_status": 200,
+    "content_type": "audio/mpeg",
+    "bytes": 857684,
+    "sha256_matches": true
+  },
+  {
+    "path": "assets/audio/LCOL_LISTENING_05_NEWS.mp3",
+    "http_status": 200,
+    "content_type": "audio/mpeg",
+    "bytes": 1075441,
+    "sha256_matches": true
+  }
+]
