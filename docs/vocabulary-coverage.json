@@ -1,0 +1,412 @@
+{
+  "sourceEntries": 221,
+  "groups": 40,
+  "sections": {
+    "vocab-0-1": {
+      "entries": [
+        "0 cero / zero",
+        "1 uno / one",
+        "2 dos / two",
+        "3 tres / three",
+        "4 cuatro / four",
+        "5 cinco / five",
+        "6 seis / six",
+        "7 siete / seven",
+        "8 ocho / eight",
+        "9 nueve / nine",
+        "10 diez / ten",
+        "11 once",
+        "12 doce",
+        "13 trece",
+        "14 catorce",
+        "15 quince",
+        "16 dieciséis",
+        "17 diecisiete",
+        "18 dieciocho",
+        "19 diecinueve",
+        "20 veinte",
+        "21 veintiuno",
+        "22 veintidós",
+        "23 veintitrés",
+        "24 veinticuatro",
+        "25 veinticinco",
+        "26 veintiséis",
+        "27 veintisiete",
+        "28 veintiocho",
+        "29 veintinueve",
+        "30 treinta",
+        "31 treinta y uno"
+      ],
+      "groups": [
+        "numbers-0-7",
+        "numbers-8-15",
+        "numbers-16-23",
+        "numbers-24-31"
+      ]
+    },
+    "vocab-0-2": {
+      "entries": [
+        "lunes / Monday",
+        "martes / Tuesday",
+        "miércoles / Wednesday",
+        "jueves / Thursday",
+        "viernes / Friday",
+        "sábado / Saturday",
+        "domingo / Sunday",
+        "enero / January",
+        "febrero / February",
+        "marzo / March",
+        "abril / April",
+        "mayo / May",
+        "junio / June",
+        "julio / July",
+        "agosto / August",
+        "septiembre / September",
+        "octubre / October",
+        "noviembre / November",
+        "diciembre / December"
+      ],
+      "groups": [
+        "days",
+        "months-1",
+        "months-2"
+      ]
+    },
+    "vocab-0-3": {
+      "entries": [
+        "rojo/a / red",
+        "azul / blue",
+        "amarillo/a / yellow",
+        "verde / green",
+        "negro/a / black",
+        "blanco/a / white",
+        "marrón / brown",
+        "gris / grey",
+        "rosa / pink",
+        "naranja / orange",
+        "morado/a / purple"
+      ],
+      "groups": [
+        "colours-1",
+        "colours-2"
+      ]
+    },
+    "vocab-0-4": {
+      "entries": [
+        "un perro / dog",
+        "un gato / cat",
+        "un pez / fish",
+        "un pájaro / bird",
+        "un caballo / horse",
+        "una vaca / cow",
+        "una oveja / sheep"
+      ],
+      "groups": [
+        "animals"
+      ]
+    },
+    "vocab-0-5": {
+      "entries": [
+        "hace sol / it’s sunny",
+        "hace frío / it’s cold",
+        "hace calor / it’s hot",
+        "hace viento / it’s windy",
+        "llueve / it’s raining",
+        "nieva / it’s snowing",
+        "hay nubes / it’s cloudy"
+      ],
+      "groups": [
+        "weather-basics"
+      ]
+    },
+    "vocab-0-6": {
+      "entries": [
+        "alto/a / tall",
+        "bajo/a / short",
+        "moreno/a / dark-haired",
+        "rubio/a / blond",
+        "ojos azules / blue eyes",
+        "barba / beard",
+        "gafas / glasses",
+        "amable / kind",
+        "trabajador/a / hard-working",
+        "tímido/a / shy"
+      ],
+      "groups": [
+        "descriptions-1",
+        "descriptions-2"
+      ]
+    },
+    "vocab-1-1": {
+      "entries": [
+        "el aula / classroom",
+        "el laboratorio / science lab",
+        "la biblioteca / library",
+        "el gimnasio / gym",
+        "la cafetería / canteen",
+        "el patio / yard",
+        "la oficina / office",
+        "el pasillo / corridor",
+        "la entrada / entrance",
+        "los aseos / toilets"
+      ],
+      "groups": [
+        "school-places-1",
+        "school-places-2"
+      ]
+    },
+    "vocab-1-2": {
+      "entries": [
+        "las matemáticas / maths",
+        "el inglés / English",
+        "el español / Spanish",
+        "la historia / history",
+        "la geografía / geography",
+        "la biología / biology",
+        "la química / chemistry",
+        "la física / physics",
+        "el arte / art",
+        "la música / music",
+        "la educación física / PE"
+      ],
+      "groups": [
+        "school-subjects-1",
+        "school-subjects-2"
+      ]
+    },
+    "vocab-1-3": {
+      "entries": [
+        "el profesor / teacher",
+        "la profesora / (female) teacher",
+        "la directora / principal",
+        "el subdirector / deputy principal",
+        "los alumnos / students",
+        "el conserje / caretaker",
+        "el secretario / secretary"
+      ],
+      "groups": [
+        "school-people"
+      ]
+    },
+    "vocab-1-4": {
+      "entries": [
+        "entrar / to start",
+        "salir / to finish",
+        "el recreo / break",
+        "el horario / timetable",
+        "el examen / exam",
+        "los deberes / homework"
+      ],
+      "groups": [
+        "school-routine"
+      ]
+    },
+    "vocab-1-5": {
+      "entries": [
+        "me gusta / I like",
+        "no me gusta / I don’t like",
+        "me encanta / I love",
+        "odio / I hate",
+        "interesante / interesting",
+        "aburrido / boring",
+        "fácil / easy",
+        "difícil / difficult",
+        "estresante / stressful"
+      ],
+      "groups": [
+        "school-opinions",
+        "school-feelings"
+      ]
+    },
+    "vocab-2-1": {
+      "entries": [
+        "los padres / parents",
+        "los hermanos / siblings",
+        "el abuelo / grandfather",
+        "la abuela / grandmother",
+        "el tío / uncle",
+        "la tía / aunt",
+        "el primo / male cousin",
+        "la prima / female cousin"
+      ],
+      "groups": [
+        "family-members-1",
+        "family-members-2"
+      ]
+    },
+    "vocab-2-2": {
+      "entries": [
+        "alto/a / tall",
+        "bajo/a / short",
+        "delgado/a / slim",
+        "moreno/a / dark-haired",
+        "rubio/a / fair-haired",
+        "tiene barba / has a beard",
+        "lleva gafas / wears glasses"
+      ],
+      "groups": [
+        "family-appearance"
+      ]
+    },
+    "vocab-2-3": {
+      "entries": [
+        "amable / kind",
+        "trabajador/a / hard-working",
+        "tímido/a / shy",
+        "divertido/a / fun",
+        "serio/a / serious"
+      ],
+      "groups": [
+        "family-personality"
+      ]
+    },
+    "vocab-2-4": {
+      "entries": [
+        "me llevo bien con… / I get on well with…",
+        "me peleo con… / I argue with…",
+        "compartir habitación / share a room",
+        "ayudar en casa / help at home"
+      ],
+      "groups": [
+        "family-relationships"
+      ]
+    },
+    "vocab-3-1": {
+      "entries": [
+        "un piso / apartment",
+        "una casa adosada / terraced house",
+        "una casa semiadosada / semi-detached",
+        "un chalé / detached house",
+        "una granja / farm",
+        "un estudio / studio"
+      ],
+      "groups": [
+        "home-housing"
+      ]
+    },
+    "vocab-3-2": {
+      "entries": [
+        "la planta baja / ground floor",
+        "la primera planta / first floor",
+        "el salón / living room",
+        "la cocina / kitchen",
+        "el comedor / dining room",
+        "el aseo / toilet",
+        "el cuarto de baño / bathroom",
+        "el dormitorio / bedroom",
+        "el pasillo / corridor",
+        "el jardín / garden",
+        "el garaje / garage",
+        "el trastero / storage room"
+      ],
+      "groups": [
+        "home-rooms-1",
+        "home-rooms-2"
+      ]
+    },
+    "vocab-3-3": {
+      "entries": [
+        "la cama / bed",
+        "el armario / wardrobe",
+        "la mesa / table",
+        "la silla / chair",
+        "el sofá / sofa",
+        "la estantería / shelf",
+        "el frigorífico (la nevera) / fridge",
+        "el congelador / freezer",
+        "la lavadora / washing machine",
+        "el lavavajillas / dishwasher",
+        "el horno / oven",
+        "la vitrocerámica / hob",
+        "el microondas / microwave",
+        "la televisión / TV",
+        "la calefacción / heating",
+        "el aire acondicionado / air conditioning"
+      ],
+      "groups": [
+        "home-furniture",
+        "home-appliances-1",
+        "home-appliances-2"
+      ]
+    },
+    "vocab-3-4": {
+      "entries": [
+        "pasar la aspiradora / to hoover",
+        "poner la lavadora / do the laundry",
+        "fregar los platos / wash the dishes",
+        "poner/recoger la mesa / lay/clear the table",
+        "hacer la cama / make the bed",
+        "sacar la basura / take out the rubbish",
+        "cortar el césped / mow the lawn",
+        "ordenar el cuarto / tidy the room"
+      ],
+      "groups": [
+        "home-chores-1",
+        "home-chores-2"
+      ]
+    },
+    "vocab-3-5": {
+      "entries": [
+        "cerca de / near",
+        "lejos de / far from",
+        "al lado de / next to",
+        "delante de / in front of",
+        "detrás de / behind",
+        "entre / between",
+        "encima de / on top of",
+        "debajo de / under"
+      ],
+      "groups": [
+        "home-location-1",
+        "home-location-2"
+      ]
+    },
+    "vocab-4": {
+      "entries": [
+        "quedar con amigos / meet friends",
+        "ver series / watch shows",
+        "jugar a videojuegos / play videogames",
+        "sacar fotos / take photos",
+        "subir a Insta / upload"
+      ],
+      "groups": [
+        "free-time"
+      ]
+    },
+    "vocab-5": {
+      "entries": [
+        "estar en forma / be fit",
+        "comida sana / healthy food",
+        "dolor de cabeza / headache",
+        "me duele(n) / it hurts"
+      ],
+      "groups": [
+        "health"
+      ]
+    },
+    "vocab-6": {
+      "entries": [
+        "hacer turismo / sightseeing",
+        "alojamiento / accommodation",
+        "una reserva / a booking",
+        "retraso / delay"
+      ],
+      "groups": [
+        "travel"
+      ]
+    },
+    "vocab-7": {
+      "entries": [
+        "desayuno / breakfast",
+        "almuerzo / lunch",
+        "cena / dinner",
+        "pedir / to order",
+        "la cuenta / the bill"
+      ],
+      "groups": [
+        "food"
+      ]
+    }
+  },
+  "existingYearsPractice": "pages/vocab.html#dates-years"
+}
