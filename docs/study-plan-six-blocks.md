@@ -27,7 +27,7 @@ Replaces the standalone four-week route with six blocks of four study weeks. The
 
 The route has 96 stable task IDs, separate counters for each block and an overall counter. Native details panels and six navigation links keep the page manageable. Links to blocks or weeks open the relevant panel.
 
-The old 16 tasks remain verbatim in a clearly labelled previous-plan panel. Existing ticks stay under `ol-study-plan-four-weeks-v2`; new tasks use `ol-study-plan-six-blocks-v1`. Old completion is never transferred silently to different new work. Both groups can still be updated independently. Malformed or unavailable local storage does not block the page, and a failed save is reported when ticking a task.
+The six-block plan fully replaces the old four-week plan. The obsolete previous-plan panel and its 16 tasks have been removed at the teacher’s request; the site has not yet been shared with students. Current progress continues to use `ol-study-plan-six-blocks-v1`, with the same 96 task IDs. No student work is migrated or reset. Malformed or unavailable local storage does not block the page, and a failed save is reported when ticking a task.
 
 The existing focus timer markup and `js/study-timer.js` are unchanged. Reading, listening, vocabulary, grammar, Sentence Building and writing resources themselves are not edited.
 
@@ -41,7 +41,7 @@ node tests/listening-audit.cjs
 git diff --check
 ```
 
-Results: pass. The new test verifies 6 blocks, 24 weeks, 96 unique new tasks, 16 retained legacy tasks, 164 existing local links/anchors, stable separate persistence and reloads, counters, malformed/blocked storage, block/week deep links and unchanged timer markup. The existing listening audit passes for all 25 activities and 131 questions.
+Results: pass. The new test verifies 6 blocks, 24 weeks, 96 unique new tasks, no legacy tasks or previous-plan panel, valid local links/anchors, stable current progress and reloads, counters, malformed/blocked storage, block/week deep links and unchanged timer markup. The existing listening audit passes for all 25 activities and 131 questions.
 
 These tests use a DOM simulation, not real browser rendering. Safari/iPad layout, touch interactions and real navigation remain for teacher review; the earlier Chromium download failed, so no browser test is claimed.
 
