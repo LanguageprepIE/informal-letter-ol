@@ -10,7 +10,7 @@ const vocabularyStudySets = {
       {id:'cocina', es:'la cocina', en:'kitchen', answer:'cocina', alternatives:[], example:'Preparo la cena en la cocina.', translation:'I prepare dinner in the kitchen.'},
       {id:'comedor', es:'el comedor', en:'dining room', answer:'comedor', alternatives:[], example:'Como con mi familia en el comedor.', translation:'I eat with my family in the dining room.'},
       {id:'bano', es:'el cuarto de baño', en:'bathroom', answer:'cuarto de baño', alternatives:['baño'], example:'El cuarto de baño está al lado de mi dormitorio.', translation:'The bathroom is next to my bedroom.'},
-      {id:'dormitorio', es:'el dormitorio', en:'bedroom', answer:'dormitorio', alternatives:['habitación','cuarto'], example:'Mi dormitorio es pequeño, pero cómodo.', translation:'My bedroom is small, but comfortable.'},
+      {id:'dormitorio', es:'el dormitorio', en:'bedroom', answer:'dormitorio', alternatives:['cuarto'], example:'Mi dormitorio es pequeño, pero cómodo.', translation:'My bedroom is small, but comfortable.'},
       {id:'jardin', es:'el jardín', en:'garden', answer:'jardín', alternatives:[], example:'Cuando hace sol, paso tiempo en el jardín.', translation:'When it is sunny, I spend time in the garden.'}
     ],
     sentences: [

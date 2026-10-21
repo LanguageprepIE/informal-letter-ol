@@ -15,6 +15,7 @@ for(const w of set.words){
 }
 for(const [id,answer]of [['salon','salon'],['bano','cuarto de bano'],['jardin','jardin']])assert.equal(evaluate(answer,words[id]).state,'spelling');
 assert.equal(evaluate('salonero',words.salon).recognised,false);
+assert.equal(evaluate('habitación',words.dormitorio).recognised,false,'Alternative must fit the masculine adjectives in this sentence');
 const occurrences=set.sentences.flatMap(s=>s.parts.filter(p=>typeof p==='object').map(p=>p.word));
 assert.equal(occurrences.length,6);assert.equal(new Set(occurrences).size,6);
 for(const id of occurrences)assert.ok(words[id]);
