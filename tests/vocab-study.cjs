@@ -21,8 +21,10 @@ assert.equal(occurrences.length,6);assert.equal(new Set(occurrences).size,6);
 for(const id of occurrences)assert.ok(words[id]);
 const base=execFileSync('git',['show','98e573f53145a0915edce896b94aca434ab02da5:pages/vocab.html'],{cwd:root,encoding:'utf8'});
 const vocab=fs.readFileSync(path.join(root,'pages/vocab.html'),'utf8');
-const additions=[...vocab.matchAll(/\n<p class="vocab-study-entry">.*?<\/p>/g)];assert.equal(additions.length,2);
-assert.equal(vocab.replace(/\n<p class="vocab-study-entry">.*?<\/p>/g,''),base,'All existing vocabulary, examples, year generator and inline scripts must remain byte-identical');
+const additions=[...vocab.matchAll(/\n<p class="vocab-study-entry">.*?<\/p>/g)];assert.equal(additions.length,1);
+assert.equal(vocab.replace(/\n<p class="vocab-study-(?:entry|intro)">.*?<\/p>/g,''),base,'All existing vocabulary, examples, year generator and inline scripts must remain byte-identical');
+assert.ok(!vocab.slice(0,vocab.indexOf('<div class="vocab-index-groups">')).includes('vocab-study.html?'));
+assert.ok(vocab.indexOf('class="vocab-study-entry"')>vocab.indexOf('id="vocab-3-2"'));
 for(const w of set.words)assert.ok(vocab.includes(w.es),`Existing word: ${w.es}`);
 const html=fs.readFileSync(path.join(root,'pages/vocab-study.html'),'utf8');
 for(const [,url]of html.matchAll(/(?:href|src)="([^"]+)"/g)){
@@ -61,4 +63,4 @@ n['model-answer'].open=true;n['word-reference'].open=true;s.steps[0].fire('click
 s.steps[2].fire('click');n['clear-practice'].fire('click');assert.equal(n['gap-salon'].value,'');assert.equal(s.focus,n['gap-salon']);
 s=setup('?set=missing');assert.equal(s.nodes['study-content'].hidden,true);assert.equal(s.nodes['study-unavailable'].hidden,false);
 s=setup('?set=__proto__');assert.equal(s.nodes['study-unavailable'].hidden,false);
-console.log('PASS: 6 words / 3 steps; spelling and valid alternatives; navigation, retained answers, translation, checking, reset, invalid group; original vocabulary page byte-identical apart from two new links. DOM simulation only.');
+console.log('PASS: 6 words / 3 steps; spelling and valid alternatives; navigation, retained answers, translation, checking, reset, invalid group; original vocabulary page byte-identical apart from the introduction and one section link. DOM simulation only.');
