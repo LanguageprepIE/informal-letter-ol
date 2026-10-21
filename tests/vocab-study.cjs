@@ -21,10 +21,14 @@ assert.equal(occurrences.length,6);assert.equal(new Set(occurrences).size,6);
 for(const id of occurrences)assert.ok(words[id]);
 const base=execFileSync('git',['show','98e573f53145a0915edce896b94aca434ab02da5:pages/vocab.html'],{cwd:root,encoding:'utf8'});
 const vocab=fs.readFileSync(path.join(root,'pages/vocab.html'),'utf8');
-const additions=[...vocab.matchAll(/\n<p class="vocab-study-entry">.*?<\/p>/g)];assert.equal(additions.length,1);
-assert.equal(vocab.replace(/\n<p class="vocab-study-(?:entry|intro)">.*?<\/p>/g,''),base,'All existing vocabulary, examples, year generator and inline scripts must remain byte-identical');
+const additions=[...vocab.matchAll(/\n<p class="vocab-study-entry">.*?<\/p>/g)];assert.equal(additions.length,24);
+assert.equal(vocab.replace(/\n<p class="vocab-study-(?:entry|intro)">.*?<\/p>/g,'').replace('<link rel="stylesheet" href="../css/vocab-study-links.css?v=1">',''),base,'All existing vocabulary, examples, year generator and inline scripts must remain byte-identical');
 assert.ok(!vocab.slice(0,vocab.indexOf('<div class="vocab-index-groups">')).includes('vocab-study.html?'));
-assert.ok(vocab.indexOf('class="vocab-study-entry"')>vocab.indexOf('id="vocab-3-2"'));
+for(const [key,group]of Object.entries(sets)){
+ const entry=vocab.indexOf('vocab-study.html?set='+key+'"');
+ assert.ok(entry>vocab.indexOf('id="'+group.section+'"'),key+' link inside its section');
+ assert.equal(vocab.split('vocab-study.html?set='+key+'"').length-1,1,key+' link appears once');
+}
 for(const w of set.words)assert.ok(vocab.includes(w.es),`Existing word: ${w.es}`);
 const html=fs.readFileSync(path.join(root,'pages/vocab-study.html'),'utf8');
 for(const [,url]of html.matchAll(/(?:href|src)="([^"]+)"/g)){
@@ -63,4 +67,53 @@ n['model-answer'].open=true;n['word-reference'].open=true;s.steps[0].fire('click
 s.steps[2].fire('click');n['clear-practice'].fire('click');assert.equal(n['gap-salon'].value,'');assert.equal(s.focus,n['gap-salon']);
 s=setup('?set=missing');assert.equal(s.nodes['study-content'].hidden,true);assert.equal(s.nodes['study-unavailable'].hidden,false);
 s=setup('?set=__proto__');assert.equal(s.nodes['study-unavailable'].hidden,false);
-console.log('PASS: 6 words / 3 steps; spelling and valid alternatives; navigation, retained answers, translation, checking, reset, invalid group; original vocabulary page byte-identical apart from the introduction and one section link. DOM simulation only.');
+console.log('PASS: 6 words / 3 steps; spelling and valid alternatives; navigation, retained answers, translation, checking, reset, invalid group; original vocabulary, examples and year tool byte-identical; section-only activity links. DOM simulation only.');
+
+// Every source entry is traceable to at least one curated study item.
+const coverage=require('../docs/vocabulary-coverage.json');
+const sourceEntries=new Set(Object.entries(coverage.sections).flatMap(([anchor,section])=>section.entries.map(text=>anchor+'|'+text)));
+const covered=new Set();let total=0;
+assert.equal(Object.keys(sets).length,40);assert.equal(sourceEntries.size,221);
+for(const [key,group]of Object.entries(sets)){
+ assert.ok(['text','sentences','facts'].includes(group.format));assert.ok(group.words.length>=4&&group.words.length<=8,key);
+ const ids=group.words.map(w=>w.id);assert.equal(new Set(ids).size,ids.length);
+ const occurrences=group.sentences.flatMap(s=>s.parts.filter(p=>typeof p==='object').map(p=>p.word));
+ assert.deepEqual([...occurrences].sort(),[...ids].sort(),key+' one gap per target');
+ const visible=group.sentences.flatMap(s=>s.parts.filter(p=>typeof p==='string')).join(' ').toLocaleLowerCase('es');
+ for(const w of group.words){
+  assert.ok(!new RegExp('(?:^|[^\\p{L}])'+w.answer.toLocaleLowerCase('es')+'(?:$|[^\\p{L}])','u').test(visible),key+' no visible answer leak: '+w.answer);
+  const source=w.source.section+'|'+w.source.text;assert.ok(sourceEntries.has(source),source);covered.add(source);
+  assert.ok(w.es&&w.en&&w.example&&w.translation);assert.ok(!w.example.includes('_'));
+  for(const answer of [w.answer,...w.alternatives]){assert.equal(evaluate(answer,w).state,'correct',key+': '+answer);assert.equal(evaluate(answer.toUpperCase(),w).recognised,true);}
+  assert.equal(evaluate('xxxx',w).recognised,false);
+ }
+ const state=setup('?set='+key),nodes=state.nodes;
+ assert.equal(nodes['study-words'].children.length,group.words.length);
+ assert.equal(nodes['study-reading'].className,'study-text format-'+group.format);
+ assert.ok(nodes['understand-intro'].textContent.includes(String(group.words.length)));
+ state.steps[2].fire('click');
+ for(const w of group.words)nodes['gap-'+w.id].value=w.answer;
+ nodes['completion-form'].fire('submit');assert.equal(nodes['practice-summary'].textContent,'All '+group.words.length+' words recognised.');
+ for(const w of group.words){assert.equal(nodes['gap-'+w.id].attrs['aria-labelledby'],'label-'+w.id);assert.equal(nodes['gap-'+w.id].attrs['aria-invalid'],'false');}
+ state.steps[0].fire('click');state.steps[2].fire('click');
+ for(const w of group.words)assert.equal(nodes['gap-'+w.id].value,w.answer);
+ nodes['clear-practice'].fire('click');for(const w of group.words)assert.equal(nodes['gap-'+w.id].value,'');
+ total+=group.words.length;
+}
+assert.deepEqual([...covered].sort(),[...sourceEntries].sort());assert.equal(total,223);
+assert.equal(evaluate('nevera',sets['home-appliances-1'].words[0]).recognised,true);
+const fridge=sets['home-appliances-1'].words[0];assert.equal(fridge.example.replace(fridge.answer,'nevera'),'Tengo que limpiar mi nevera.');
+const singular=sets.health.words.find(w=>w.answer==='me duele'),plural=sets.health.words.find(w=>w.answer==='me duelen');
+assert.equal(evaluate('me duelen',singular).recognised,false);assert.equal(evaluate('me duele',plural).recognised,false);
+console.log('PASS: all 40 groups / 223 practice items cover 221 original entries; all three formats render and check; references, unique links, valid alternatives and singular/plural agreement; no change to existing year practice.');
+
+const vm=require('node:vm');
+const oldData=execFileSync('git',['show','dece33763fe39eba18ac2c712cf074d5527b2fbb:js/vocab-study-data.js'],{cwd:root,encoding:'utf8'});
+const ctx={module:{exports:{}}};vm.runInNewContext(oldData,ctx);
+const oldPilot=JSON.parse(JSON.stringify(ctx.module.exports['home-rooms-1']));
+const pilot=JSON.parse(JSON.stringify(sets['home-rooms-1']));
+for(const k of ['section','format','referenceLabel'])delete pilot[k];
+pilot.words.forEach(w=>delete w.source);
+assert.deepEqual(pilot,oldPilot,'Approved pilot content remains unchanged');
+assert.equal(evaluate('rojo',sets['colours-1'].words[0]).recognised,false,'Mi mochila es roja: feminine agreement');
+assert.equal(evaluate('alto',sets['family-appearance'].words[0]).recognised,false,'Mi hermana es alta: feminine agreement');

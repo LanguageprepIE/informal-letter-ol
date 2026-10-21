@@ -8,12 +8,13 @@ function withoutVocabularyDiacritics(value) {
 function evaluateVocabularyAnswer(value,word) {
   const normal = normaliseVocabularyAnswer(value);
   if (!normal) return {state:'empty',recognised:false,message:'Write a word or expression using the English clue.'};
-  const clean = normal.replace(/^(el|la|los|las|un|una|unos|unas)\s+/u,'');
   const answers = [word.answer,...word.alternatives];
-  const match = answers.find(answer => withoutVocabularyDiacritics(answer) === withoutVocabularyDiacritics(clean));
+  const stripped = normal.replace(/^(el|la|los|las|un|una|unos|unas)\s+/u,'');
+  const clean = answers.some(answer=>withoutVocabularyDiacritics(normaliseVocabularyAnswer(answer))===withoutVocabularyDiacritics(normal)) ? normal : stripped;
+  const match = answers.find(answer => withoutVocabularyDiacritics(normaliseVocabularyAnswer(answer)) === withoutVocabularyDiacritics(clean));
   if (!match) return {state:'review',recognised:false,message:'Revisit this word. Use the English clue or consult the vocabulary list below.'};
-  if (clean !== match) return {state:'spelling',recognised:true,message:'Word recognised. Check the spelling: '+match+'.'};
-  if (clean !== normal) return {state:'correct',recognised:true,message:'Right word. Write '+match+' here without the article; the sentence already provides it.'};
+  if (clean !== normaliseVocabularyAnswer(match)) return {state:'spelling',recognised:true,message:'Word recognised. Check the spelling: '+match+'.'};
+  if (clean !== normal) return {state:'correct',recognised:true,message:'Right word. In this gap, write only '+match+'.'};
   if (match !== word.answer) return {state:'correct',recognised:true,message:'Correct: '+match+' also fits here. The expression studied is '+word.answer+'.'};
   return {state:'correct',recognised:true,message:'Correct / Correcto.'};
 }
@@ -28,6 +29,16 @@ function initVocabularyStudy(doc,search,sets) {
   get('study-title').textContent=set.title;
   get('study-topic').textContent=set.topic;
   get('reference-link').href=set.reference;
+  get('reference-link').textContent='← '+(set.referenceLabel || set.topic);
+  const count=set.words.length,format=set.format || 'text';
+  get('understand-intro').textContent='Study these '+count+' words or expressions with their examples. / Estudia estas '+count+' palabras o expresiones con sus ejemplos.';
+  const reading={text:['Read the short text. Notice how the words fit into the sentences. / Observa las palabras en el texto.','Complete the same text using the English clues. / Completa el mismo texto con las pistas en inglés.'],sentences:['Read each example separately. These are independent situations. / Lee cada ejemplo por separado: son situaciones independientes.','Complete the same examples using the English clues. / Completa los mismos ejemplos con las pistas en inglés.'],facts:['Read these short information cards. Each one gives a separate piece of information. / Lee estas fichas breves: cada una aporta un dato independiente.','Complete the same information cards using the English clues. / Completa las mismas fichas con las pistas en inglés.']};
+  const instructions=reading[format];
+  get('read-intro').textContent=instructions[0];
+  get('complete-intro').textContent=instructions[1]+' Write only the missing part; the rest is already provided. / Escribe solo la parte que falta.';
+  get('study-reading').className='study-text format-'+format;
+  get('model-text').className='study-text format-'+format;
+  get('read-title').textContent=format==='facts'?'2. Read the information / Lee la información':format==='sentences'?'2. Read the examples / Lee los ejemplos':'2. Read in context / Lee en contexto';
   doc.title=set.title+' — Guided vocabulary study · LC OL';
   for (const word of set.words) {
     const row=make('div'),term=make('dt',word.es);term.lang='es';
@@ -48,10 +59,11 @@ function initVocabularyStudy(doc,search,sets) {
     for(const part of sentence.parts){
       if(typeof part==='string'){p.append(doc.createTextNode(part));continue;}
       const word=byId[part.word],label=make('label',undefined,'word-gap');
-      const accessible=make('span','Spanish word or expression for '+word.en,'sr-only');accessible.lang='en';
+      const accessible=make('span','Spanish word or expression for '+word.en,'sr-only');accessible.lang='en';accessible.id='label-'+word.id;
       const input=make('input');input.type='text';input.id='gap-'+word.id;input.name=word.id;input.maxLength=60;input.autocomplete='off';input.setAttribute('autocapitalize','none');input.spellcheck=false;
       const clue=make('span',word.en,'gap-clue');clue.id='clue-'+word.id;clue.lang='en';
       const feedback=make('span','','word-feedback');feedback.id='feedback-'+word.id;feedback.lang='en';
+      input.setAttribute('aria-labelledby',accessible.id);
       input.setAttribute('aria-describedby',clue.id+' '+feedback.id);
       label.append(accessible,input,clue,feedback);p.append(label);fields.push({input,feedback,word});
     }
