@@ -1,7 +1,7 @@
-/* Progress belongs to this browser. Keep legacy ticks separate from the new route. */
+/* Progress for the six-block study route belongs to this browser. */
 (() => {
   const status = document.getElementById('study-save-status');
-  function bindProgress(selector, attribute, key, counter, onUpdate) {
+  function bindProgress(selector, key, counter, onUpdate) {
     const boxes = [...document.querySelectorAll(selector)];
     let saved = [];
     try {
@@ -13,14 +13,14 @@
     function update() {
       const complete = boxes.filter(box => box.checked).length;
       document.getElementById(counter).textContent = complete + ' / ' + boxes.length +
-        (attribute === 'task' ? ' tasks completed / tareas completadas' : ' previous tasks completed / tareas anteriores completadas');
+        ' tasks completed / tareas completadas';
       if (onUpdate) onUpdate(boxes);
     }
     boxes.forEach(box => {
-      box.checked = saved.includes(box.dataset[attribute]);
+      box.checked = saved.includes(box.dataset.task);
       box.addEventListener('change', () => {
         try {
-          localStorage.setItem(key, JSON.stringify(boxes.filter(item => item.checked).map(item => item.dataset[attribute])));
+          localStorage.setItem(key, JSON.stringify(boxes.filter(item => item.checked).map(item => item.dataset.task)));
           status.textContent = 'Progress saved on this device. / Progreso guardado en este dispositivo.';
         } catch (_) {
           status.textContent = 'Progress could not be saved. Keep a note before leaving. / No se ha podido guardar; anota tu progreso antes de salir.';
@@ -30,13 +30,12 @@
     });
     update();
   }
-  bindProgress('[data-task]', 'task', 'ol-study-plan-six-blocks-v1', 'study-progress', boxes => {
+  bindProgress('[data-task]', 'ol-study-plan-six-blocks-v1', 'study-progress', boxes => {
     document.querySelectorAll('[data-block-progress]').forEach(counter => {
       const group = boxes.filter(box => box.dataset.block === counter.dataset.blockProgress);
       counter.textContent = group.filter(box => box.checked).length + ' / ' + group.length + ' tasks / tareas';
     });
   });
-  bindProgress('[data-legacy-task]', 'legacyTask', 'ol-study-plan-four-weeks-v2', 'legacy-progress');
 
   function openTarget() {
     let target;

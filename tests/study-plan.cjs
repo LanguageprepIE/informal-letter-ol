@@ -4,7 +4,7 @@ const root=path.resolve(__dirname,'..'),file=path.join(root,'pages/plan.html'),h
 const attrs=s=>Object.fromEntries([...s.matchAll(/([\w-]+)="([^"]*)"/g)].map(m=>[m[1],m[2]]));
 const inputs=[...html.matchAll(/<input\b([^>]+)>/g)].map(m=>attrs(m[1]));
 const tasks=inputs.filter(a=>a['data-task']),legacy=inputs.filter(a=>a['data-legacy-task']);
-assert.equal(tasks.length,96);assert.equal(legacy.length,16);assert.equal(new Set(tasks.map(a=>a['data-task'])).size,96);
+assert.equal(tasks.length,96);assert.equal(legacy.length,0);assert.equal(new Set(tasks.map(a=>a['data-task'])).size,96);
 for(let b=1;b<=6;b++){assert.equal(tasks.filter(a=>a['data-block']===String(b)).length,16);for(let w=1;w<=4;w++)for(let s=1;s<=4;s++)assert.ok(tasks.some(a=>a['data-task']===`b${b}-w${w}-s${s}`));}
 for(let w=1;w<=24;w++)assert.ok(html.includes(`id="week-${w}"`));
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
@@ -18,7 +18,8 @@ for(const [,url]of html.matchAll(/(?:href|src)="([^"]+)"/g)){
 }
 const base='485235217e6f1fac23aed2310daa9edc417f679f';
 const old=execFileSync('git',['show',`${base}:pages/plan.html`],{cwd:root}).toString();
-const oldSections=[...old.matchAll(/<section class="study-week">[\s\S]*?<\/section>/g)].map(m=>m[0].replaceAll('data-task=','data-legacy-task='));for(const section of oldSections)assert.ok(html.includes(section),'Preserve legacy tasks verbatim');
+assert.ok(!html.includes('previous-plan'));
+assert.ok(!html.includes('Previous four-week plan'));
 const timer=s=>s.match(/<div class="card study-timer">[\s\S]*?<p id="timer-status"[^>]*>[\s\S]*?<\/p><\/div>/)[0];assert.equal(timer(html),timer(old));
 const current='ol-study-plan-six-blocks-v1',previous='ol-study-plan-four-weeks-v2';
 function setup(initial={},fail=false,hash=''){
@@ -32,12 +33,11 @@ function setup(initial={},fail=false,hash=''){
  return {storage,els,boxes,oldBoxes,counters,ctx,el,changeHash(v){ctx.location.hash=v;callback()}};
 }
 let s=setup({[previous]:'["1","5"]',[current]:'["b2-w1-s1","unknown"]'},false,'#week-8');
-assert.equal(s.boxes.filter(b=>b.checked).length,1);assert.equal(s.oldBoxes.filter(b=>b.checked).length,2);assert.ok(s.el('study-progress').textContent.startsWith('1 / 96'));assert.ok(s.el('legacy-progress').textContent.startsWith('2 / 16'));assert.ok(s.el('block-2').open);assert.ok(s.el('week-8').scrolled);
+assert.equal(s.boxes.filter(b=>b.checked).length,1);assert.ok(s.el('study-progress').textContent.startsWith('1 / 96'));assert.ok(s.el('block-2').open);assert.ok(s.el('week-8').scrolled);
 s.boxes[0].checked=true;s.boxes[0].change();assert.deepEqual(JSON.parse(s.storage[current]),['b1-w1-s1','b2-w1-s1']);assert.equal(s.storage[previous],'["1","5"]');assert.ok(s.counters[0].textContent.startsWith('1 / 16'));
-s.oldBoxes[0].checked=false;s.oldBoxes[0].change();assert.deepEqual(JSON.parse(s.storage[previous]),['5']);assert.deepEqual(JSON.parse(s.storage[current]),['b1-w1-s1','b2-w1-s1']);
-s=setup(s.storage);assert.equal(s.boxes.filter(b=>b.checked).length,2);assert.equal(s.oldBoxes.filter(b=>b.checked).length,1);
+s=setup(s.storage);assert.equal(s.boxes.filter(b=>b.checked).length,2);assert.equal(s.storage[previous],'["1","5"]');
 for(const bad of ['{broken','null','{}','4','"text"','[5,null]']){s=setup({[current]:bad,[previous]:bad});assert.equal(s.boxes.filter(b=>b.checked).length,0);assert.equal(s.oldBoxes.filter(b=>b.checked).length,0);}
 s=setup({},true);s.boxes[0].checked=true;s.boxes[0].change();assert.ok(s.el('study-progress').textContent.startsWith('1 / 96'));assert.ok(s.el('study-save-status').textContent.includes('could not be saved'));
 s=setup();s.changeHash('#block-6');assert.ok(s.el('block-6').open);s.changeHash('#%');s.changeHash('#missing');
 assert.ok(!html.includes('library is in preparation'));assert.ok(!fs.readFileSync(path.join(root,'index.html'),'utf8').includes('Audiciones en preparación'));
-console.log(`PASS: 6 blocks / 24 weeks / 96 tasks; ${links} valid local links; legacy 16 tasks retained; separate persistence, malformed/blocked storage, block counters and deep links; unchanged timer markup. DOM simulation only.`);
+console.log(`PASS: 6 blocks / 24 weeks / 96 tasks; ${links} valid local links; no obsolete plan; current progress preserved and persisted, malformed/blocked storage, block counters and deep links; unchanged timer markup. DOM simulation only.`);
