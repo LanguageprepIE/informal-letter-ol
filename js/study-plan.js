@@ -37,6 +37,45 @@
     });
   });
 
+
+  // Pace preferences never read or write the existing progress key.
+  const paceKey = 'ol-study-plan-weekly-pace-v1';
+  const paces = {
+    quiet: {time: '20 min Monday–Thursday + 10 min weekend · 90 min/week', extra: 'Use the 20-minute main tasks with help. Weekend (10 min): revisit three useful words in the review group and check one difficult answer.'},
+    balanced: {time: '25 min Monday–Thursday + 15 min weekend · 115 min/week', extra: 'Extra 5 min/session: check mistakes, then recall three earlier words. Weekend (15 min): use the review group below and revisit one difficult answer.'},
+    intensive: {time: '30 min Monday–Thursday + 20 min weekend · 140 min/week', extra: 'Extra 10 min/session: recall without help, check errors and apply two phrases in your own sentences. Weekend (20 min): use the review group without help first, correct it and retry difficult items.'}
+  };
+  let preferences = {};
+  try {
+    const saved = JSON.parse(localStorage.getItem(paceKey) || '{}');
+    if (saved && typeof saved === 'object' && !Array.isArray(saved)) {
+      for (let week = 1; week <= 24; week++) {
+        if (Object.hasOwn(paces, saved[week])) preferences[week] = saved[week];
+      }
+    }
+  } catch (_) { /* Studying remains available without storage. */ }
+  document.querySelectorAll('[data-week-pace]').forEach(select => {
+    const week = select.dataset.weekPace;
+    function showPace() {
+      const pace = paces[select.value];
+      document.getElementById('pace-time-' + week).textContent = pace.time;
+      document.getElementById('pace-extra-' + week).textContent = pace.extra;
+    }
+    select.value = preferences[week] || 'balanced';
+    showPace();
+    select.addEventListener('change', () => {
+      if (!Object.hasOwn(paces, select.value)) select.value = 'balanced';
+      preferences[week] = select.value;
+      showPace();
+      try {
+        localStorage.setItem(paceKey, JSON.stringify(preferences));
+        status.textContent = 'Week ' + week + ' pace saved on this device. Task ticks are unchanged.';
+      } catch (_) {
+        status.textContent = 'Pace could not be saved. Note your choice before leaving. Task ticks are unchanged.';
+      }
+    });
+  });
+
   function openTarget() {
     let target;
     try { target = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (_) { return; }
