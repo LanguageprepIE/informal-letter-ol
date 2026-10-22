@@ -12,7 +12,7 @@ let links=0;
 for(const [,url]of html.matchAll(/(?:href|src)="([^"]+)"/g)){
  if(/^https?:/.test(url))continue;
  const [raw,fragment]=url.split('#'),p=raw.split('?')[0];
- if(raw.includes('vocab-study.html?')){const group=new URLSearchParams(raw.split('?')[1]).get('group');const context=vm.createContext({});vm.runInContext(fs.readFileSync(path.join(root,'js/vocab-study-data.js'),'utf8')+';globalThis.sets=vocabularyStudySets',context);assert.ok(context.sets[group],`Missing group: ${group}`);}const relative=p.startsWith('/informal-letter-ol/')?path.join(root,p.slice('/informal-letter-ol/'.length)||'index.html'):p?path.resolve(path.dirname(file),p):file;
+ if(raw.includes('vocab-study.html?')){const group=new URLSearchParams(raw.split('?')[1]).get('set');const context=vm.createContext({});vm.runInContext(fs.readFileSync(path.join(root,'js/vocab-study-data.js'),'utf8')+';globalThis.sets=vocabularyStudySets',context);assert.ok(context.sets[group],`Missing group: ${group}`);}const relative=p.startsWith('/informal-letter-ol/')?path.join(root,p.slice('/informal-letter-ol/'.length)||'index.html'):p?path.resolve(path.dirname(file),p):file;
  assert.ok(fs.existsSync(relative),`Missing link: ${url}`);
  if(fragment)assert.ok(fs.readFileSync(relative,'utf8').includes(`id="${fragment}"`),`Missing anchor: ${url}`);
  links++;

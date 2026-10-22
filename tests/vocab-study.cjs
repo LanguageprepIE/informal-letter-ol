@@ -117,3 +117,17 @@ pilot.words.forEach(w=>delete w.source);
 assert.deepEqual(pilot,oldPilot,'Approved pilot content remains unchanged');
 assert.equal(evaluate('rojo',sets['colours-1'].words[0]).recognised,false,'Mi mochila es roja: feminine agreement');
 assert.equal(evaluate('alto',sets['family-appearance'].words[0]).recognised,false,'Mi hermana es alta: feminine agreement');
+
+// Exercise the real destination initializer for every Study Plan vocabulary URL.
+const plan=fs.readFileSync(path.join(root,'pages/plan.html'),'utf8');
+const planLinks=[...plan.matchAll(/href="(vocab-study.html\?[^"]+)"/g)].map(m=>m[1]);
+assert.equal(planLinks.length,48);
+for(const url of planLinks){
+ const search=url.slice(url.indexOf('?')),key=new URLSearchParams(search).get('set');
+ assert.ok(key&&Object.hasOwn(sets,key),url+' must use the destination set parameter');
+ assert.ok(vocab.includes('href="'+url+'"'),url+' must match an approved catalogue URL');
+ const destination=setup(search);
+ assert.equal(destination.nodes['study-title'].textContent,sets[key].title,url+' must load the intended group');
+ assert.equal(destination.nodes['study-words'].children.length,sets[key].words.length);
+}
+console.log('PASS: all 48 Study Plan vocabulary URLs initialize their intended approved activity.');
