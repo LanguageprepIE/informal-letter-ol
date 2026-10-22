@@ -79,5 +79,5 @@ plan task markup is compared with the pre-change main commit. All educational re
 files and the timer script remain unchanged.
 
 Browser limitation: Playwright browser installation failed with a truncated archive;
-no real Chromium, Safari/iPad or mobile rendering test is claimed. PDF pages were rendered
+local browser tests were unavailable. After publication, the remote Chrome browser verified desktop rendering and the recommended default selection; Safari/iPad and mobile rendering remain untested. PDF pages were rendered
 with Poppler and inspected visually; actual printer hardware was not available.
