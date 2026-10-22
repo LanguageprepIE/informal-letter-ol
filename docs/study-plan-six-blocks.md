@@ -2,7 +2,7 @@
 
 21 October 2026. Base: `485235217e6f1fac23aed2310daa9edc417f679f`.
 
-Replaces the standalone four-week route with six blocks of four study weeks. There are four sessions of about 20 minutes per week: language/vocabulary, reading, listening and writing. These are flexible study weeks without fixed dates, leaving space for holidays, school exams, catch-up and final revision. The route is a selection with spaced retrieval, not a requirement to complete the entire site or an official examination schedule.
+Replaces the standalone four-week route with six blocks of four study weeks. There are four core sessions per week: language/vocabulary, reading, listening and writing. These are flexible study weeks without fixed dates, leaving space for holidays, school exams, catch-up and final revision. The route is a selection with spaced retrieval, not a requirement to complete the entire site or an official examination schedule.
 
 | Block | Weeks | Focus |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ Replaces the standalone four-week route with six blocks of four study weeks. The
 - Listening support follows the audit, rather than increasing mechanically by file number. Long activities are reserved for the final block; Guided remains available when needed.
 - Reading starts mostly with Guided, revisits familiar texts independently and moves to new Independent texts with direct Guided correction links.
 - Writing moves from four personal sentences through paragraphs and short emails to complete original practice prompts, with time for correction. Twenty minutes is a study target, not an official SEC task timing.
-- Language tasks link to existing vocabulary anchors, named Sentence Building workshops and actual grammar sections. They use recall, covered translations and sentence production. No new vocabulary quiz system is introduced in this change; broader vocabulary practice remains a separate follow-up.
+- Language tasks link to existing vocabulary anchors, named Sentence Building workshops and actual grammar sections. They use recall, covered translations and sentence production. The 22 October update adds direct links to approved interactive groups, using Understand → Read → Complete/check.
 - `index.html` describes the six-block plan and removes the obsolete “auditions in preparation” wording.
 
 ## Progress and timer
@@ -45,4 +45,39 @@ Results: pass. The new test verifies 6 blocks, 24 weeks, 96 unique new tasks, no
 
 These tests use a DOM simulation, not real browser rendering. Safari/iPad layout, touch interactions and real navigation remain for teacher review; the earlier Chromium download failed, so no browser test is claimed.
 
-Prepared on a review branch. No merge or production publication is authorized by this change alone.
+
+
+## Weekly pace and vocabulary update — 22 October 2026
+
+One plan still contains the same 96 task IDs. Each week has an accessible native select:
+Quiet (20 minutes Monday–Thursday + 10 weekend = 90), Balanced (25 + 15 = 115,
+recommended default), Intensive (30 + 20 = 140). Preferences use the separate
+`ol-study-plan-weekly-pace-v1` key. The existing progress key is unchanged. Invalid
+pace values are ignored; blocked storage reports a save failure without blocking study.
+The timer remains an independent 20-minute focus / five-minute break tool.
+
+Language sessions allocate about ten minutes to one main interactive group and ten
+to the existing language task. Weekend links offer a related group or a spaced revisit;
+no extra checkbox or completion condition is introduced. Quiet uses guided essential
+work; Balanced adds correction and retrieval; Intensive adds unaided recall, error
+repair and own sentences. Learners may stop at the time budget and continue later.
+The route deliberately selects useful groups rather than requiring all 40 groups.
+School, family, free time, weather, health, food, dates, travel and descriptions recur
+with increasing independence. Earlier lists, Grammar and Sentence Building links remain.
+
+The six-page tracker retains the original Reading, Listening and Writing summaries in
+`docs/study-tracker-content.json`. `scripts/build-study-tracker.py` generates its main and
+review vocabulary labels from the live plan, with 72 hand-tick pace boxes, 96 task boxes,
+dates, review notes and class notes. Rebuild with Python, ReportLab and DejaVu Sans fonts.
+Check with `python3 tests/study-tracker.py`; visually render all six pages before release.
+
+Validation also includes `node tests/vocab-study.cjs`, `node tests/study-timer.cjs`,
+`node --check js/study-plan.js` and `git diff --check`. Extended plan tests check all
+three paces, weekly persistence, malformed/blocked storage, unchanged progress,
+all 96 checkboxes and valid query-string vocabulary groups. Reading/Listening/Writing
+plan task markup is compared with the pre-change main commit. All educational resource
+files and the timer script remain unchanged.
+
+Browser limitation: Playwright browser installation failed with a truncated archive;
+no real Chromium, Safari/iPad or mobile rendering test is claimed. PDF pages were rendered
+with Poppler and inspected visually; actual printer hardware was not available.

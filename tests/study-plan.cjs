@@ -11,7 +11,8 @@ const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Se
 let links=0;
 for(const [,url]of html.matchAll(/(?:href|src)="([^"]+)"/g)){
  if(/^https?:/.test(url))continue;
- const [p,fragment]=url.split('#');const relative=p.startsWith('/informal-letter-ol/')?path.join(root,p.slice('/informal-letter-ol/'.length)||'index.html'):p?path.resolve(path.dirname(file),p):file;
+ const [raw,fragment]=url.split('#'),p=raw.split('?')[0];
+ if(raw.includes('vocab-study.html?')){const group=new URLSearchParams(raw.split('?')[1]).get('group');const context=vm.createContext({});vm.runInContext(fs.readFileSync(path.join(root,'js/vocab-study-data.js'),'utf8')+';globalThis.sets=vocabularyStudySets',context);assert.ok(context.sets[group],`Missing group: ${group}`);}const relative=p.startsWith('/informal-letter-ol/')?path.join(root,p.slice('/informal-letter-ol/'.length)||'index.html'):p?path.resolve(path.dirname(file),p):file;
  assert.ok(fs.existsSync(relative),`Missing link: ${url}`);
  if(fragment)assert.ok(fs.readFileSync(relative,'utf8').includes(`id="${fragment}"`),`Missing anchor: ${url}`);
  links++;
@@ -26,11 +27,12 @@ function setup(initial={},fail=false,hash=''){
  const storage={...initial},els={};let callback;
  function el(id){return els[id]??={textContent:'',open:false,scrollIntoView(){this.scrolled=true},closest(){return this.block??null}};}
  const make=a=>({dataset:Object.fromEntries(Object.entries(a).filter(([k])=>k.startsWith('data-')).map(([k,v])=>[k.slice(5).replace(/-([a-z])/g,(_,c)=>c.toUpperCase()),v])),checked:false,addEventListener(t,f){this[t]=f}});
+ const selects=Array.from({length:24},(_,i)=>({...make({'data-week-pace':String(i+1)}),value:'balanced'}));
  const boxes=tasks.map(make),oldBoxes=legacy.map(make),counters=Array.from({length:6},(_,i)=>({...el(`counter-${i+1}`),dataset:{blockProgress:String(i+1)}}));
  for(let b=1;b<=6;b++){el(`block-${b}`).block=el(`block-${b}`);for(let w=1;w<=4;w++)el(`week-${(b-1)*4+w}`).block=el(`block-${b}`);}
- const ctx=vm.createContext({document:{getElementById:el,querySelectorAll(s){return s==='[data-task]'?boxes:s==='[data-legacy-task]'?oldBoxes:s==='[data-block-progress]'?counters:[]}},location:{hash},window:{addEventListener(t,f){callback=f}},localStorage:{getItem(k){if(fail)throw Error('unavailable');return storage[k]??null},setItem(k,v){if(fail)throw Error('quota');storage[k]=v}}});
+ const ctx=vm.createContext({document:{getElementById:el,querySelectorAll(s){return s==='[data-week-pace]'?selects:s==='[data-task]'?boxes:s==='[data-legacy-task]'?oldBoxes:s==='[data-block-progress]'?counters:[]}},location:{hash},window:{addEventListener(t,f){callback=f}},localStorage:{getItem(k){if(fail)throw Error('unavailable');return storage[k]??null},setItem(k,v){if(fail)throw Error('quota');storage[k]=v}}});
  vm.runInContext(fs.readFileSync(path.join(root,'js/study-plan.js'),'utf8'),ctx);
- return {storage,els,boxes,oldBoxes,counters,ctx,el,changeHash(v){ctx.location.hash=v;callback()}};
+ return {storage,els,boxes,oldBoxes,counters,ctx,el,selects,changeHash(v){ctx.location.hash=v;callback()}};
 }
 let s=setup({[previous]:'["1","5"]',[current]:'["b2-w1-s1","unknown"]'},false,'#week-8');
 assert.equal(s.boxes.filter(b=>b.checked).length,1);assert.ok(s.el('study-progress').textContent.startsWith('1 / 96'));assert.ok(s.el('block-2').open);assert.ok(s.el('week-8').scrolled);
@@ -41,3 +43,32 @@ s=setup({},true);s.boxes[0].checked=true;s.boxes[0].change();assert.ok(s.el('stu
 s=setup();s.changeHash('#block-6');assert.ok(s.el('block-6').open);s.changeHash('#%');s.changeHash('#missing');
 assert.ok(!html.includes('library is in preparation'));assert.ok(!fs.readFileSync(path.join(root,'index.html'),'utf8').includes('Audiciones en preparación'));
 console.log(`PASS: 6 blocks / 24 weeks / 96 tasks; ${links} valid local links; no obsolete plan; current progress preserved and persisted, malformed/blocked storage, block counters and deep links; unchanged timer markup. DOM simulation only.`);
+
+const paceKey='ol-study-plan-weekly-pace-v1';
+s=setup({[current]:'["b1-w1-s1"]'});
+assert.equal(s.selects.length,24);assert.ok(s.selects.every(x=>x.value==='balanced'));
+for(const [pace,minutes] of [['quiet','90'],['balanced','115'],['intensive','140']]){
+ s.selects[0].value=pace;s.selects[0].change();
+ assert.ok(s.el('pace-time-1').textContent.includes(minutes+' min/week'));
+ assert.equal(s.storage[current],'["b1-w1-s1"]');assert.ok(s.boxes[0].checked);
+ assert.equal(s.selects[1].value,'balanced');
+}
+s.selects[1].value='quiet';s.selects[1].change();s=setup(s.storage);
+assert.equal(s.selects[0].value,'intensive');assert.equal(s.selects[1].value,'quiet');
+const savedPaces=s.storage[paceKey];
+for(const box of s.boxes){box.checked=true;box.change();}
+assert.ok(s.el('study-progress').textContent.startsWith('96 / 96'));
+assert.equal(s.storage[paceKey],savedPaces);
+for(const bad of ['{','null','[]','42','{"1":"invalid","2":"quiet","3":"toString"}']){
+ s=setup({[paceKey]:bad});assert.equal(s.selects[0].value,'balanced');assert.equal(s.selects[2].value,'balanced');
+}
+s=setup({},true);s.selects[0].value='quiet';s.selects[0].change();
+assert.ok(s.el('study-save-status').textContent.includes('could not be saved'));
+assert.ok(s.el('pace-time-1').textContent.includes('90 min/week'));
+const baseline=execFileSync('git',['show','1fe8cbe:pages/plan.html'],{cwd:root,encoding:'utf8'});
+const originalTasks=[...baseline.matchAll(/data-task="([^"]+)"/g)].map(m=>m[1]);
+assert.deepEqual(tasks.map(a=>a['data-task']),originalTasks);
+const mainTasks=text=>[...text.matchAll(/<label class="study-task">.*?data-task="[^"]+-s[234]".*?<\/label>/g)].map(m=>m[0]);
+assert.deepEqual(mainTasks(html),mainTasks(execFileSync('git',['show','1fe8cbe:pages/plan.html'],{cwd:root,encoding:'utf8'})));
+assert.equal((html.match(/data-week-pace=/g)||[]).length,24);
+console.log('PASS: three paces; independent weekly persistence/reload; pace and all 96 progress ticks do not affect each other; malformed/blocked storage; valid direct vocabulary groups; Reading/Listening/Writing tasks unchanged.');
